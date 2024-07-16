@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="./script.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,700;1,500;1,700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <main>
+        <div class="container">
+            <div class="heading">
+                <span>Achieve your</span> <span>goals</span>
+            </div>
+            <div class="main-section">
+                <div class="main-section-heading">
+                    <span>Tasks</span>
+                    <img src="./assets/sun.svg" alt="sun image" srcset="">
+                </div>
+                <div class="motivational-banner">
+                    <span class="motivational-banner-quotes"></span>
+                    <br>
+                    <i class="author">author:<span class="author-name"></span></i>
+                </div>
+                <div class="progress-bar">
+                    <div class="bar-holder">
+                        <div class="main-bar">
+
+                        </div>
+                        <div class="tasks-completed">
+                            <span class="completed-value"><span class="first_value">0</span>/<span class="second_value">0</span></span>
+                            <span >completed</span>
+                        </div>
+                    </div>
+
+                </div>
+                <span class="horizontal-line"></span>
+                <div class="carts">
+                    <div>
+                        <label for="checkbox-task" class="try blur-this">
+                            <div class="cart-container">
+                                <input type="checkbox" id="checkbox-task" class="input-box">
+                                <span class="lineThrough">Your task goes here</span>
+                                <img src="./assets/delete.svg" alt="" srcset="">
+                            </div>
+                        </label>
+                    </div>
+
+                </div>
+            </div>
+            <div class="add-carts">
+                +
+            </div>
+        </div>
+        <div class="popup-cart">
+            <img src="./assets/close.svg" class="close_button"style="width:20px" alt="" srcset="">
+            <h2>Enter your task here</h2>
+            <div class="userInputSection">
+            <input type="text" maxlength="40" >
+            <button>Submit</button>
+        </div>
+            <img src="./assets/robot.svg" class='' alt="" srcset="">
+        </div>
+    </main>
+</body>
+
+</html>
