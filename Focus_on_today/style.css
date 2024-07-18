@@ -15,6 +15,10 @@ body {
 main {
     display: flex;
     min-height: 50vh;
+    flex-direction: column;
+    justify-content: center;
+    /* align-items: center; */
+    /* position: relative; */
 }
 
 .container {
@@ -41,6 +45,15 @@ main {
 .heading span+span {
     color: #90846d;
 }
+.social-media{
+    display: flex;
+    justify-content: center;
+    gap:10px
+}
+.social-media img{
+ border-radius: 5px;
+ 
+}
 
 .main-section-heading {
     display: flex;
@@ -64,11 +77,11 @@ main {
     display: flex;
     flex-direction: column;
     gap: 25px;
-    background: #5e4c4c;
+    background: #4f4040;
     padding: 35px 43px;
     border-radius: 12px;
     color: white;
-    box-shadow: 5px 5px 20px rgb(99, 97, 97);
+    box-shadow: 0px 0px 10px rgb(141, 140, 140);
 
 }
 
@@ -125,13 +138,15 @@ main {
 
 .cart-container {
     min-height: 70px;
+    background-color: #5a5656;
     padding: 10px;
-    box-shadow: 0 0 10px grey;
+    box-shadow: 0 0 10px rgb(232, 230, 230);
     border-radius: 10px;
     cursor: pointer;
     position: relative;
     display: flex;
     align-items: center;
+ 
     transition: scale 0.25s ease-out;
 }
 
@@ -153,8 +168,9 @@ main {
     accent-color: purple;
 }
 
-.add-carts {
-    width: 40px;
+.add-carts{
+    width: 60px;
+    height: 60px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -164,8 +180,8 @@ main {
     border-radius: 20px;
     background-color: rgb(157, 10, 157);
     position: absolute;
+    top:120px;
     right: 50px;
-    top: 100px;
     cursor: pointer;
     transition: scale 0.25s ease-out ;
 }
@@ -187,6 +203,7 @@ main {
 
 .blur-this {
     opacity: 0.4;
+    color: black;
     pointer-events: none;
 }
 
@@ -236,6 +253,7 @@ main {
     align-items: center;
     text-transform: capitalize;
     transition: all 1s ease-in-out;
+    z-index: 100;
     color: white;
 }
 
@@ -288,8 +306,32 @@ main {
     justify-content: center;
     top: 50%;
     left: 50%;
+    z-index: 100;
     transform: translate(-50%, -50%);
 
+}
+.copyright-section a {
+    text-decoration: none;
+    color:rgb(52, 38, 18);
+}
+.copyright-section{
+    position: absolute;
+    color: antiquewhite;
+    width: 100%;
+    font-size: 9px;
+    font-style: italic;
+    text-align: center;
+    /* bottom: -10px; */
+}
+.lineThrough{
+    width: 100px;
+    text-overflow:ellipsis ;
+    display: flex;
+    flex-wrap: wrap;
+}
+.text-decoration{
+    text-decoration: line-through;
+   text-decoration-color:red ;
 }
 
 @keyframes blinker {
@@ -308,10 +350,16 @@ main {
         scale: 1.2;
     }
 }
+.last-section{
+    position: relative;
+    margin-top: -35px;
+}
 
 @media screen and (max-width:600px) {
     .container{
-        min-width: 500px;
+        min-width: 300px;
+        padding-inline: 0;
+        margin-inline: 20px;
     }
     .motivational-banner {
         position: relative;
@@ -327,11 +375,16 @@ main {
 
     .carts div .cart-container {
         display: flex;
+ 
     }
 
     .cart-container img {
         height: 50px;
         width: 40px;
+    }
+    .add-carts{
+        top: 80px;
+        right: 20px;
     }
 
     .popup-alert {
@@ -339,13 +392,29 @@ main {
         align-items: center;
         justify-content: center;
         position: absolute;
-        width: 400px;
+        z-index: 100;
+        min-width: 300px;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
 
     }
 
+}
+
+@media screen and (max-width:370px) {
+    .heading span {
+        font-size: 24px;
+    }
+    .last-section .copyright-section h2{
+        font-size: 9px;
+    }
+    .container{
+        margin: 30px;
+    }
+    .last-section {
+        margin-top:-50px ;
+    }
 }
 
 .display_none {

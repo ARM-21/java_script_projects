@@ -21,8 +21,28 @@ let userInput = document.querySelector('.popup-cart input')
 let submitButton = document.querySelector('.popup-cart button')
 let userValue;
 let completedCount = 0;
+let countForID = 0;
 let quotesNumber = 0;
+let valueExisted = false;
+taskGetter()
 quotesGenerator();
+progressbar();
+function quotesGenerator() {
+  let val;
+  let data = fetch("./quotes.json")
+    .then((res) => {
+      return res.json();
+    })
+    .then((data) => {
+      val = data.map((data) => {
+        return data;
+      });
+      quotes = val;
+      return val;
+    });
+
+  return val;
+}
 //!<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<--task creater>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 function taskCreater(task, count) {
   let division = document.createElement("div");
@@ -41,8 +61,13 @@ function taskCreater(task, count) {
   inputTag.type = "checkbox";
   inputTag.classList.add("input-box");
   inputTag.classList.add("accent-color");
-
+ 
+  if(!valueExisted){
   inputTag.id = `checkbox-task${count}`;
+  }
+  else{
+    inputTag.id =count;
+  }
   //
   let spanTag = document.createElement("span");
   spanTag.innerText = `${task}`;
@@ -57,14 +82,15 @@ function taskCreater(task, count) {
 
   //!<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<--remove the cart>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
   imgTag.addEventListener("click", (e) => {
+    let removeItemLocalStorage = imgTag.previousElementSibling.previousElementSibling.id;
+    localStorage.removeItem(removeItemLocalStorage)
     if (imgTag.previousElementSibling.previousElementSibling.checked == true) {
       completedCount--;
     }
 
     cartsLength = document.querySelectorAll(".cart-container");
-    taskCompleted.innerHTML = `<span class="first_value">${completedCount}</span>/<span class="second_value">${
-      cartsLength.length - 1
-    }</span`;
+    taskCompleted.innerHTML = `<span class="first_value">${completedCount}</span>/<span class="second_value">${cartsLength.length - 1
+      }</span>`;
     let ele = e.target.parentElement.parentElement;
     if (ele.classList.contains("try")) {
       if (
@@ -80,8 +106,9 @@ function taskCreater(task, count) {
   });
   //input tag event listener
   inputTag.addEventListener("change", (e) => {
-    lineThrough = inputTag.nextElementSibling;
+    inputTag.nextElementSibling.classList.toggle('text-decoration');
     cartsLength = document.querySelectorAll(".cart-container");
+    // localStorage.removeItem(inputTag.id);
     if (inputTag.checked) {
       completedCount++;
     } else {
@@ -100,35 +127,40 @@ addCart.addEventListener("click", (e) => {
   firstCart.parentElement.remove();
   cartsLength = document.querySelectorAll(".cart-container");
   seperateCheckboxCount++;
-  taskCompleted.innerHTML = `<span class="first_value">${completedCount}</span>/<span class="second_value">${
-    cartsLength.length + 1
-  }</span>`;
+  taskCompleted.innerHTML = `<span class="first_value">${completedCount}</span>/<span class="second_value">${cartsLength.length + 1
+    }</span>`;
   progressbar();
   // taskCreater("have a great day", seperateCheckboxCount);
 });
 
 //!<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<--generating quotes>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-function quotesGenerator() {
-  let val;
-  let data = fetch("./quotes.json")
-    .then((res) => {
-      return res.json();
-    })
-    .then((data) => {
-      val = data.map((data) => {
-        return data;
-      });
-      quotes = val;
-      return val;
-    });
 
-  return val;
-}
 //!<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<--updating quotes>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 let count = 0;
 let innerCounter = 0;
 let authorCounter = 0;
+setInterval(() => {
+  if (count >= quotes.length) {
+    count = 0;
+    quotesNumber = 0;
+    motivate_banner.innerText = "";
+  } else {
+    if (innerCounter >= quotes[count].text.length) {
+      quotesNumber++;
+      innerCounter = 0;
+      authorCounter = 0;
+      quotes_author.innerHTML = "";
+      authorName();
+      motivate_banner.innerText = "";
+      count++;
+    } else {
+      motivate_banner.innerHTML += quotes[count].text[innerCounter];
+      innerCounter++;
+    }
+  }
+}, 300);
+
 function authorName() {
   id = setInterval(() => {
     if (authorCounter >= quotes[quotesNumber].author.length) {
@@ -147,30 +179,6 @@ function authorName() {
 authorName();
 
 
-  motivate_banner_id = setInterval(() => {
-    if (count >= quotes.length) {
-      count = 0;
-      quotesNumber = 0;
-      motivate_banner.innerText = "";
-    } else {
-      if (innerCounter >= quotes[count].text.length) {
-        quotesNumber++;
-        // clearInterval(motivate_banner_id);
-        innerCounter = 0;
-        authorCounter = 0;
-        quotes_author.innerHTML = "";
-        authorName();
-        motivate_banner.innerText = "";
-        count++;
-      } else {
-        motivate_banner.innerHTML += quotes[count].text[innerCounter];
-        innerCounter++;
-      }
-    }
-  }, 300);
-
-// motivate_banner_invoker();
-// setInterval(motivate_banner_invoker,8000)
 
 function progressbar() {
   let first_value_capture = document.querySelector(".first_value");
@@ -196,25 +204,46 @@ function progressbar() {
   }
   lineThrough.style.textDecorationLine = "line-through";
 }
-progressbar();
 
 
-closeButton.addEventListener('click',(e)=>[
-  popup_cart.classList.add('display_none') 
-])
 
-submitButton.addEventListener('click',()=>
-{
-
-userValue = userInput.value;
-console.log(userValue )
-if(userValue.length != 0){
-taskCreater(userValue,count)
-count++;
-popup_cart.classList.add('display_none') 
-userInput.value=""
-}
-else{
-  alert("Enter some value")
-}
+closeButton.addEventListener('click', (e) => {
+  popup_cart.classList.add('display_none')
+  userInput.value = "";
 })
+
+submitButton.addEventListener('click', () => {
+  userValue = userInput.value;
+  if (userValue.length != 0) {
+    localStorage.setItem(`checkbox-task${countForID}`, userValue)
+    localStorage.setItem('counter',`${countForID}`)
+    taskCreater(userValue, countForID)
+    
+  countForID++;    
+    popup_cart.classList.add('display_none')
+    userInput.value = ""
+  }
+  else {
+    alert("Enter some value")
+  }
+})
+
+function taskGetter(){
+
+  valueExisted = true;
+if(localStorage.length >1){
+  firstCart.parentElement.remove();
+  let existedkeys = Object.keys(localStorage);
+ for(let i=0;i<existedkeys.length;i++){
+  if(existedkeys[i] == 'counter'){
+    continue;
+  }
+  else{
+    taskCreater(localStorage.getItem(existedkeys[i]),existedkeys[i]);
+   
+  }
+ }
+countForID =parseInt(localStorage.getItem('counter')) + 1;
+}
+valueExisted=false;
+}
