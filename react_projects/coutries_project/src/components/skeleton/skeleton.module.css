@@ -1,0 +1,17 @@
+.skeleton_color{
+    background-color: rgba(128, 128, 128, 0.644);
+    width: 250px;
+    height: 343px;
+    animation: skeleton 1.5s infinite linear;
+}
+
+@keyframes skeleton {
+    0% {
+        background-position: 200% 0;
+        opacity: 0.5;
+    }
+    100% {
+        background-position: -200% 0;
+        opacity: 1;
+    }
+}

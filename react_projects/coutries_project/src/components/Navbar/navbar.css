@@ -1,0 +1,29 @@
+header nav{
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin-inline: auto;
+    padding-inline:20px;
+    flex-wrap: wrap;
+    font-size: 20px;
+
+}
+header nav h2,.dark_mode_enabler{
+    cursor: pointer;
+}
+
+a{
+    text-decoration: none;
+    color: var(--text-color);
+}
+header{
+    width: 100%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.203);
+    background-color: var(--background-color);
+}
+.dark_mode_enabler{
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+}
+
