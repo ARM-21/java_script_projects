@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import styles from './countrypage.module.css'
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import CountryContext from '../../Contexts/CountryContext';
 
 export default function CoutryPage({ countryData }) {
+
+    let [darkMode,setDarkMode] = useContext(CountryContext)
     let { flags, name, population, region, capital, subregion, languages, currencies, tld, borders } = { ...countryData }
     let currName;
     let languagesOfCountry;
@@ -88,7 +91,8 @@ export default function CoutryPage({ countryData }) {
 
 
     return (
-        <>
+        <main style={{height:"100vh"}} className={`${darkMode?'dark_mode':""}`}>
+        <div className={`${darkMode?'dark_mode':""}`} style={{height:"70vh",display:"grid",placeItems:"center"}} >
             <div className={styles.wrapper}>
                 <div className={styles.button_container}>
                     <Link to={'/'}> <button className={styles.back_button} onClick={() => {
@@ -137,6 +141,7 @@ export default function CoutryPage({ countryData }) {
                     </div>
                 </div>
             </div>
-        </>
+            </div>
+        </main>
     )
 }

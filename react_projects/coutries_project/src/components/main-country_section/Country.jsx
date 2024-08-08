@@ -4,7 +4,7 @@ import './country.css';
 export default function Country({countryDetails}){
     return (
             <div className="country">
-            <Link to={`./${countryDetails.name.common}`}>
+            <Link to={`./${countryDetails.name.common}`} state={countryDetails}>
                 <img src={countryDetails.flags.svg} alt={countryDetails.flags.alt}/>
                 <div className="country_info">
                     <h3>{countryDetails.name.common}</h3>

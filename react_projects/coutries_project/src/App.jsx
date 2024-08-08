@@ -1,21 +1,18 @@
-
 import { useState } from 'react';
 import './App.css'
-import darkmode from './assets/dark-mode-icon.svg';
 import Navbar from './components/Navbar/Navbar';
 import { Outlet } from 'react-router-dom';
-
+import CountryContext from './Contexts/CountryContext';
 
 function App() {
-const[isDataloaded,setDataLoaded] = useState(false);
-
+  const darkMode= useState(JSON.parse(localStorage.getItem('dark')));
   return (
     <>
-      <div>
-      <Navbar src={darkmode}  loading={setDataLoaded}/>
-        <Outlet/>
+      <CountryContext.Provider value={darkMode}>
+      <Navbar />
+        <Outlet context={darkMode}/>
        
-      </div>
+      </CountryContext.Provider>
     </>
   )
 }

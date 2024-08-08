@@ -21,6 +21,7 @@
     border-radius: 5px;
     padding: 5px;
     width: 250px;
+    background-color: var(--element-color);
 
 
 } 

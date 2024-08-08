@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import CoutryPage from './CoutryPage';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 
 export default function Main_country() {
+    const {state} = useLocation();
     const [countryData,setCountryData] = useState('');
     const [dataLoaded,setDataLoaded] = useState(false);
     const [countryNotFound,setCountryNotFound]=useState(false);
@@ -10,6 +11,7 @@ export default function Main_country() {
     const params = useParams();
     const userInputCountry = params.country;
     useEffect(()=>{
+        if(state==null){   
        fetch(`https://restcountries.com/v3.1/name/${userInputCountry}`)
        .then(res => {
         if (!res.ok) {
@@ -25,7 +27,11 @@ export default function Main_country() {
         setDataLoaded(true)
         setCountryNotFound(true)
         })
-     
+    }
+        else{
+        setCountryData(state);
+        setDataLoaded(true)
+        }
     },[userInputCountry])
     if(countryNotFound){
         return <span className=''>COuntry not found</span>

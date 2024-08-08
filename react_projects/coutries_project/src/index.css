@@ -1,9 +1,4 @@
 
-:root{
-  --background-color:white ;
-  --text-color:black;
-  --element-color:black;
-}
 body{
   margin:0;
   padding: 0;
@@ -11,6 +6,21 @@ body{
   color: var(--text-color);
   font-family: 'Nunito Sans', sans-serif;
   
+}
+:root{
+  --background-color:white;
+  --text-color:black;
+  --element-color:white;
+}
+header,main{
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+header.dark_mode, main.dark_mode{
+  --background-color:rgb(24, 24, 43);
+  --text-color:rgb(255, 255, 255);
+  /* --element-color:rgb(1, 1, 1); */
+
 }
 
 *{
