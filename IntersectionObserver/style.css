@@ -1,0 +1,31 @@
+body{
+    margin:0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+*{
+    box-sizing: border-box;
+}
+.card{
+    height: 30px;
+    width: 300px;
+    border: 2px solid black;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    font-size: 30px;
+    transition: transform 0.5s ease-in-out;
+    visibility: hidden;
+    transform: translateX(300px);
+}
+
+.show{
+    visibility: visible;
+    transform: translateX(0px);
+}

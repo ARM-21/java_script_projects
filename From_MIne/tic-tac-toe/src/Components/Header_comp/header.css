@@ -1,0 +1,19 @@
+header{
+margin: auto;
+max-width: 200px;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+}
+
+.header_section{
+    width: 100%;
+    margin-top:20px;
+}
+
+header img{
+    width: 200px;
+    height: 100px;
+    object-fit: contain;
+}
