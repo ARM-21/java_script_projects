@@ -5,18 +5,20 @@ import Skeleton from '../skeleton/Skeleton.jsx';
 
 export default function Countries({ targetCountry, targetRegion,dataLoad,dataLoaded }) {
   const [country, setCountryData] = useState([]);
-
+console.log(targetCountry,targetRegion)
   useEffect(() => {
-    fetch('https://restcountries.com/v3.1/all')
+    fetch('https://restcountries.com/v3.1/all?fields=name,flags,population,region,capital')
       .then((res) => {
+        
         return res.json()
       })
       .then((data) => {
-        
+        console.log(data)
         setCountryData(data)
         dataLoad(true);
        
       })
+      // console.log(country)
   },[])
 if(!dataLoaded){
 return <Skeleton/>
@@ -28,6 +30,7 @@ return <Skeleton/>
       {
         (((targetCountry.length > 0 && targetRegion.length > 0) || (targetCountry.length > 0) || (targetRegion.length > 0))) ?
           country.filter((country) => {
+            console.log(country)
             return (country.name.common.toLowerCase().includes(targetCountry.toLowerCase()) && country.region.toLowerCase().includes(targetRegion.toLowerCase()))
           })
             .map((country) => {
